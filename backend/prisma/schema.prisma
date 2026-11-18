@@ -7,20 +7,51 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Estado {
+  EN_DESARROLLO
+  TERMINADO
+  ARCHIVADO
+}
+
+enum Categoria {
+  PROPIO
+  CLASE
+  TRABAJO
+  FRONTEND_MENTOR
+}
+
 model Proyecto {
-  id          Int @id @default(autoincrement())
-  nombre      String
-  descripcion String
-  slug        String @unique
-  web_url     String
-  github      String
-  img_url     String
-  tecnologias  Tecnologia[]
+  id                Int              @id @default(autoincrement())
+  nombre            String
+  descripcion       String
+  descripcion_larga String?
+  slug              String           @unique
+  web_url           String?
+  github            String?
+  img_url           String?
+  estado            Estado           @default(TERMINADO)
+  publicado         Boolean          @default(true)
+  categoria         Categoria        @default(PROPIO)
+  destacado         Boolean          @default(false)
+  orden             Int              @default(0)
+  caracteristicas   String[]
+  aprendizajes      String[]
+  tecnologias       Tecnologia[]
+  imagenes          ProyectoImagen[]
 }
 
 model Tecnologia {
-  id          Int @id @default(autoincrement())
-  nombre      String
-  slug        String @unique
-  proyectos   Proyecto[]
+  id        Int        @id @default(autoincrement())
+  nombre    String
+  slug      String     @unique
+  proyectos Proyecto[]
+}
+
+model ProyectoImagen {
+  id          Int      @id @default(autoincrement())
+  url         String
+  alt         String?
+  orden       Int      @default(0)
+  proyecto_id Int
+  proyecto    Proyecto @relation(fields: [proyecto_id], references: [id], onDelete: Cascade)
 }
