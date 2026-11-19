@@ -36,6 +36,12 @@ body {
     rgba(77, 171, 255, 1) 0%,
     rgba(37, 99, 235, 1) 100%
   );
+  /* Estados de proyecto */
+  --color-terminado: #16a34a;
+  --color-desarrollo: #d97706;
+
+  --dark-color-terminado: #22c55e;
+  --dark-color-desarrollo: #f59e0b;
 }
 
 /* Estilso generales de botones */

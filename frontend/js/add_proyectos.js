@@ -24,9 +24,18 @@ async function LoadProjects() {
         <div class="card ${proyecto.destacado ? "card--destacada" : ""}">
             <img src="${proyecto.img_url ?? "./public/proyecto-default.png"}" alt="">
             <span class="badge-status">
-                ${proyecto.estado == "TERMINADO" ? `<div class="terminado"></div> terminado` : `<div class="desarrollo"></div> en desarrollo`}
+                ${proyecto.estado == "TERMINADO" ? `<div class="status terminado"></div> terminado` : `<div class="status desarrollo"></div> en desarrollo`}
             </span>
             
+            <div class="card-body">
+
+            <div class="details">
+            ${proyecto.destacado ? `<span class="etiqueta-destacado">Proyecto destacado</span>` : ""}
+                <h3 class="title">${proyecto.nombre}</h3>
+                <p class="description">
+                    ${proyecto.descripcion}
+                </p>
+            </div>
             <div class="stack" id="stackPill">
                 ${proyecto.tecnologias
                   .map(
@@ -34,13 +43,7 @@ async function LoadProjects() {
                       `<div class="stack-pill pill1">${tech.nombre}</div>`,
                   )
                   .join("")}
-            </div>
-            <div class="details">
-                <h3 class="title">${proyecto.nombre}</h3>
-                <p class="description">
-                    ${proyecto.descripcion}
-                </p>
-            </div>
+                </div>
             <div class="btns">
             ${
               proyecto.web_url
@@ -67,6 +70,7 @@ async function LoadProjects() {
                     </svg>
                 </a>
             </div>
+        <div>
         </div>
         `;
   });
