@@ -10,7 +10,11 @@ const app = express();
 const port = process.env.PORT || 4444;
 
 const corsOptions = {
-  origin: ["https://ismartin.com", "http://127.0.0.1:3000"],
+  origin: [
+    "https://ismartin.com",
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+  ],
 };
 
 app.disable("x-powered-by");

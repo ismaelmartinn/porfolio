@@ -113,6 +113,17 @@
   cursor: default;
 }
 
+.badge-status {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background-color: var(--light-card-bg);
+  border-radius: 9999px;
+  font-size: small;
+  padding: 10px 20px;
+  color: var(--text-secundary);
+}
+
 /* --- Dark Mode --- */
 .dark .proyectos h2 {
   color: var(--dark-text-color);
@@ -137,6 +148,17 @@
 
 .dark .project-cards .card .description {
   color: var(--dark-text-secundary);
+}
+
+.dark .badge-status {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background-color: var(--dark-card-bg);
+  color: var(--dark-text-secundary);
+  border-radius: 9999px;
+  font-size: small;
+  padding: 10px 20px;
 }
 
 /* --- Responsive --- */

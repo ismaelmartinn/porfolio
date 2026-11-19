@@ -79,3 +79,5 @@ Desktop.ini
 *.backup
 
 /backend/src/generated/prisma
+
+/docs
