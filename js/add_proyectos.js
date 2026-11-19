@@ -1,5 +1,10 @@
+const API_URL =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1"
+    ? "http://localhost:3001/api"
+    : "https://porfolio-api.ismartin.com/api";
+
 async function FetchProjects() {
-  const res = await fetch("https://porfolio-api.ismartin.com/api/proyectos");
+  const res = await fetch(`${API_URL}/proyectos`);
   if (!res.ok) {
     throw new Error(`HTTP ${res.status}`);
   }
@@ -11,11 +16,26 @@ async function FetchProjects() {
 async function LoadProjects() {
   const proyectos = await FetchProjects();
   const proyectosContainer = document.getElementById("projectSection");
-  proyectos.forEach((proyecto) => {
+  const proyectosOrdenados = proyectos.toSorted(
+    (a, b) => b.destacado - a.destacado,
+  );
+  proyectosOrdenados.forEach((proyecto) => {
     proyectosContainer.innerHTML += `
-        <div class="card">
-            <img src="${proyecto.img_url}" alt="">
+        <div class="card ${proyecto.destacado ? "card--destacada" : ""}">
+            <img src="${proyecto.img_url ?? "./public/proyecto-default.png"}" alt="">
+            <span class="badge-status">
+                ${proyecto.estado == "TERMINADO" ? `<div class="status terminado"></div> terminado` : `<div class="status desarrollo"></div> en desarrollo`}
+            </span>
             
+            <div class="card-body">
+
+            <div class="details">
+            ${proyecto.destacado ? `<span class="etiqueta-destacado">Proyecto destacado</span>` : ""}
+                <h3 class="title">${proyecto.nombre}</h3>
+                <p class="description">
+                    ${proyecto.descripcion}
+                </p>
+            </div>
             <div class="stack" id="stackPill">
                 ${proyecto.tecnologias
                   .map(
@@ -23,15 +43,11 @@ async function LoadProjects() {
                       `<div class="stack-pill pill1">${tech.nombre}</div>`,
                   )
                   .join("")}
-            </div>
-            <div class="details">
-                <h3 class="title">${proyecto.nombre}</h3>
-                <p class="description">
-                    ${proyecto.descripcion}
-                </p>
-            </div>
+                </div>
             <div class="btns">
-                <a href="${proyecto.web_url}" class="btn btn-primary" target="_blank">
+            ${
+              proyecto.web_url
+                ? `<a href="${proyecto.web_url}" class="btn btn-primary" "target="_blank">
                     Ver Web
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -40,7 +56,10 @@ async function LoadProjects() {
                         <path d="M10 14 21 3" />
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                     </svg>
-                </a>
+                    </a>
+                `
+                : ""
+            }
                 <a href="${proyecto.github}" class="btn btn-secundary" target="_blank">
                     Ver Código
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -51,6 +70,7 @@ async function LoadProjects() {
                     </svg>
                 </a>
             </div>
+        <div>
         </div>
         `;
   });
