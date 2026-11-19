@@ -23,14 +23,27 @@ router.post("/", writeLimiter, requireWriteKey, async (req, res) => {
       detalles: result.error.issues,
     });
   }
-  const { nombre, descripcion, slug, web_url, github, img_url, tecnologias } =
-    result.data;
+  const {
+    nombre,
+    descripcion,
+    descripcion_larga,
+    estado,
+    destacado,
+    slug,
+    web_url,
+    github,
+    img_url,
+    tecnologias,
+  } = result.data;
 
   try {
     const project = await prisma.proyecto.create({
       data: {
         nombre,
         descripcion,
+        descripcion_larga,
+        estado,
+        destacado,
         slug,
         web_url,
         github,

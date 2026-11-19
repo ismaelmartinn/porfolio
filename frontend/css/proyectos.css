@@ -159,6 +159,10 @@
     .title {
       text-align: start;
     }
+
+    .etiqueta-destacado {
+      color: var(--text-secundary);
+    }
   }
 }
 
@@ -180,6 +184,10 @@
   color: var(--text-pills-dark);
 }
 
+.project-cards .card--destacada .card-body .details .etiqueta-destacado {
+  color: var(--dark-text-secundary);
+}
+
 .dark .project-cards .card .title {
   color: var(--dark-text-color);
 }
@@ -196,7 +204,7 @@
   color: var(--dark-text-secundary);
   border-radius: 9999px;
   font-size: small;
-  padding: 10px 20px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   gap: 10px;
