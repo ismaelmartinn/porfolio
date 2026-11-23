@@ -342,9 +342,9 @@
   }
 }
 
-@media (min-width: 900px) and (max-width: 1400px) {
+@media (min-width: 901px) and (max-width: 1400px) {
   .proyectos {
-    width: 96%;
+    width: 98%;
     margin: 6rem auto;
   }
 
